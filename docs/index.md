@@ -27,3 +27,9 @@ That's it. You now have access to all shared tools, pipelines, and databases.
 
 Start with [Activating the Environment](getting-started/activation.md), then
 try [First Steps](getting-started/first-steps.md).
+
+## For Maintainers
+
+The home base for managing lab infrastructure (pipelines, databases,
+environments, and planning) is `/groups/diamond/software/lab_env_docs/`.
+See the [Maintainer Guide](contributing/maintainer-guide.md) for details.

@@ -2,12 +2,25 @@
 
 **Current maintainers:** sdiamond, pengfanz
 
+## Home Base
+
+The central directory for managing all lab infrastructure is:
+
+```
+/groups/diamond/software/lab_env_docs/
+```
+
+This contains the `CLAUDE.md` reference file, design specs, and implementation
+plans. Start Claude Code sessions from this directory for full context on
+pipelines, databases, environments, and documentation.
+
 ## Repository Locations
 
 | Repo | Local Path | GitHub |
 |------|-----------|--------|
 | diamond-lab-env | `/groups/diamond/software/lab-env/` | diamondlab-ucb/diamond-lab-env |
 | diamond-lab-docs | `/groups/diamond/software/diamond-lab-docs/` | diamondlab-ucb/diamond-lab-docs |
+| lab_env_docs | `/groups/diamond/software/lab_env_docs/` | — (local planning docs) |
 
 ## Common Operations
 
