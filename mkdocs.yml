@@ -1,0 +1,66 @@
+site_name: Diamond Lab Documentation
+site_url: https://diamondlab-ucb.github.io/diamond-lab-docs/
+site_description: Documentation for the Diamond Lab shared bioinformatics environment
+
+repo_name: diamondlab-ucb/diamond-lab-docs
+repo_url: https://github.com/diamondlab-ucb/diamond-lab-docs
+
+theme:
+  name: material
+  palette:
+    - scheme: default
+      primary: teal
+      accent: teal
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - scheme: slate
+      primary: teal
+      accent: teal
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  features:
+    - navigation.sections
+    - navigation.expand
+    - navigation.top
+    - search.suggest
+    - content.code.copy
+
+nav:
+  - Home: index.md
+  - Getting Started:
+    - Activating the Environment: getting-started/activation.md
+    - First Steps: getting-started/first-steps.md
+    - FAQ: getting-started/faq.md
+  - Environment:
+    - Overview: environment/overview.md
+    - Installed Tools: environment/tools.md
+    - Wrapper Scripts: environment/wrapper-scripts.md
+  - Databases:
+    - Overview: databases/overview.md
+    - Environment Databases: databases/environment-dbs.md
+    - Lab Databases: databases/lab-dbs.md
+    - Versions: databases/versions.md
+    - Adding Databases: databases/adding-databases.md
+  - Pipelines:
+    - Overview: pipelines/overview.md
+    - meta-pipeline-MAGDrep: pipelines/meta-pipeline-MAGDrep.md
+  - Contributing:
+    - Adding Tools: contributing/adding-tools.md
+    - Adding Pipelines: contributing/adding-pipelines.md
+    - Maintainer Guide: contributing/maintainer-guide.md
+  - Reference:
+    - Environment Variables: reference/environment-variables.md
+
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.tabbed:
+      alternate_style: true
+  - toc:
+      permalink: true
