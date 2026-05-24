@@ -24,7 +24,7 @@ All required databases are pre-configured via environment variables. You do
 | `genome_stats` | SeqKit | Length, GC, N50, contig count |
 | `checkm1` (optional) | CheckM1 | Marker-gene completeness/contamination |
 | `checkm2` | CheckM2 | Neural-net completeness/contamination |
-| `gtdbtk` | GTDB-Tk | Taxonomy via GTDB r226 |
+| `gtdbtk` | GTDB-Tk | Taxonomy via GTDB r232 |
 | `dereplicate` | skani + scipy | All-vs-all ANI, species-level clustering |
 
 ## SLURM Execution
@@ -53,7 +53,7 @@ All configured automatically in the lab environment:
 
 | Database | Env Variable | Path |
 |----------|-------------|------|
-| GTDB r226 | `$GTDBTK_DATA_PATH` | `lab_env_db/gtdb-r226/` |
+| GTDB r232 | `$GTDBTK_DATA_PATH` | `lab_env_db/gtdb/release232/` |
 | CheckM2 DB | `$CHECKM2DB` | `lab_env_db/checkm2/` |
 | CheckM1 DB | `$CHECKM_DATA_PATH` | `lab_env_db/checkm1/` |
 

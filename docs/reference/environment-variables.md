@@ -12,7 +12,7 @@ Variables set by `source /groups/diamond/software/lab-env/activate.sh`.
 
 | Variable | Value | Tool |
 |----------|-------|------|
-| `GTDBTK_DATA_PATH` | `$DIAMOND_LAB_DB/gtdb-r226` | GTDB-Tk |
+| `GTDBTK_DATA_PATH` | `$DIAMOND_LAB_DB/gtdb/release232` | GTDB-Tk |
 | `CHECKM2DB` | `$DIAMOND_LAB_DB/checkm2` | CheckM2 |
 | `CHECKM_DATA_PATH` | `$DIAMOND_LAB_DB/checkm1` | CheckM1 |
 

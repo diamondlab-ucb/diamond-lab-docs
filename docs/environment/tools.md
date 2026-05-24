@@ -16,9 +16,9 @@ are added.
 | checkm2 | 1.1.0 | meta-pipeline-MAGDrep |
 | diamond | 2.1.11 | meta-pipeline-MAGDrep (via CheckM2) |
 | fastani | 1.34 | meta-pipeline-MAGDrep (via GTDB-Tk) |
-| gtdbtk | 2.5.2 | meta-pipeline-MAGDrep |
+| gtdbtk | 2.7.2 | meta-pipeline-MAGDrep |
 | hmmer | 3.4 | meta-pipeline-MAGDrep (via GTDB-Tk) |
-| pplacer | 1.1.alpha22 | meta-pipeline-MAGDrep (via GTDB-Tk) |
+| pplacer | 1.1.alpha19 | meta-pipeline-MAGDrep (via GTDB-Tk) |
 | prodigal | 2.6.3 | meta-pipeline-MAGDrep (via CheckM2, GTDB-Tk) |
 | seqkit | 2.13.0 | meta-pipeline-MAGDrep |
 | skani | 0.3.1 | meta-pipeline-MAGDrep |
