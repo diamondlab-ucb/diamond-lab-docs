@@ -46,6 +46,7 @@ nav:
   - Pipelines:
     - Overview: pipelines/overview.md
     - meta-pipeline-MAGDrep: pipelines/meta-pipeline-MAGDrep.md
+    - meta-pipeline-ORFanno: pipelines/meta-pipeline-ORFanno.md
   - Contributing:
     - Adding Tools: contributing/adding-tools.md
     - Adding Pipelines: contributing/adding-pipelines.md
