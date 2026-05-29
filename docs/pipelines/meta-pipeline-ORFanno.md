@@ -54,11 +54,25 @@ Three presets, picked with `--mode`:
   **50k–300k-MAG** runs on a SLURM cluster where cmscan would be the
   wall-time bottleneck. No general ncRNA, smORF, MGE, or geNomad.
 
-| Mode | rRNA tool | Other ncRNA | smORF/MGE/geNomad | DBs needed | Typical scale |
-|------|-----------|-------------|-------------------|------------|---------------|
-| `full` | cmscan (full Rfam) | yes | yes | Rfam + geNomad | ≤ few k |
-| `streamlined` | cmscan (rRNA Rfam) | rRNA only | no | Rfam | 5k–50k |
-| `fast` | **barrnap** | no | no | **none** | 50k–300k |
+| Mode | rRNA tool | tRNA tool | Other ncRNA | smORF/MGE/geNomad | DBs needed | Typical scale |
+|------|-----------|-----------|-------------|-------------------|------------|---------------|
+| `full` | cmscan (full Rfam) | tRNAscan-SE | yes | yes | Rfam + geNomad | ≤ few k |
+| `streamlined` | cmscan (rRNA Rfam) | aragorn | rRNA only | no | Rfam | 5k–50k |
+| `fast` | **barrnap** | aragorn | no | no | **none** | 50k–300k |
+
+## tRNA tool selection
+
+`--trna-tool` picks the tRNA detector independently of `--mode`. Choices:
+`trnascan-SE` (the conservative default for `full`-mode publication
+runs) or `aragorn` (the default for `streamlined` and `fast`). aragorn
+is ~165× faster on bacterial MAGs with sensitivity that matches
+tRNAscan-SE bac mode to within ±1–2 tRNAs on our benchmark fixture, so
+it's the right default whenever you're optimizing for throughput.
+
+```bash
+# Override the mode default — e.g. force tRNAscan-SE in fast mode
+meta-pipeline-ORFanno annotate -i mags/ -o out/ --mode fast --trna-tool trnascan-SE
+```
 
 ## SLURM execution (biotite)
 
