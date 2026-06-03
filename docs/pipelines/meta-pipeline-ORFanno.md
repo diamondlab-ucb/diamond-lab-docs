@@ -54,25 +54,33 @@ Three presets, picked with `--mode`:
   **50k–300k-MAG** runs on a SLURM cluster where cmscan would be the
   wall-time bottleneck. No general ncRNA, smORF, MGE, or geNomad.
 
-| Mode | rRNA tool | tRNA tool | Other ncRNA | smORF/MGE/geNomad | DBs needed | Typical scale |
-|------|-----------|-----------|-------------|-------------------|------------|---------------|
-| `full` | cmscan (full Rfam) | tRNAscan-SE | yes | yes | Rfam + geNomad | ≤ few k |
-| `streamlined` | cmscan (rRNA Rfam) | aragorn | rRNA only | no | Rfam | 5k–50k |
-| `fast` | **barrnap** | aragorn | no | no | **none** | 50k–300k |
+| Mode | rRNA tool (default) | tRNA tool (default) | Other ncRNA | smORF/MGE/geNomad | DBs needed | Typical scale |
+|------|--------------------|--------------------|-------------|-------------------|------------|---------------|
+| `full` | cmscan (Rfam_rRNA.cm) | tRNAscan-SE | yes (Rfam_no_rrna.cm) | yes | Rfam + geNomad | ≤ few k |
+| `streamlined` | barrnap | aragorn | no | mge only | none | 5k–50k |
+| `fast` | barrnap | aragorn | no | no | none | 50k–300k |
 
-## tRNA tool selection
+## tRNA + rRNA tool selection
 
-`--trna-tool` picks the tRNA detector independently of `--mode`. Choices:
-`trnascan-SE` (the conservative default for `full`-mode publication
-runs) or `aragorn` (the default for `streamlined` and `fast`). aragorn
-is ~165× faster on bacterial MAGs with sensitivity that matches
-tRNAscan-SE bac mode to within ±1–2 tRNAs on our benchmark fixture, so
-it's the right default whenever you're optimizing for throughput.
+Both detectors are tool-selectable independently of `--mode`. The flags
+take precedence over the per-mode defaults.
+
+`--trna-tool {trnascan-SE | aragorn}` — per-mode default: `full=trnascan-SE`, `streamlined/fast=aragorn`. aragorn is ~165× faster on bacterial MAGs with equivalent sensitivity.
+
+`--rrna-tool {barrnap | cmscan}` — per-mode default: `full=cmscan`, `streamlined/fast=barrnap`. barrnap is much faster (full-length rRNAs only); cmscan also finds fragments and 5.8S.
 
 ```bash
-# Override the mode default — e.g. force tRNAscan-SE in fast mode
-meta-pipeline-ORFanno annotate -i mags/ -o out/ --mode fast --trna-tool trnascan-SE
+# Override per-mode defaults — e.g. force the conservative tools in streamlined mode
+meta-pipeline-ORFanno annotate -i mags/ -o out/ --mode streamlined \
+  --trna-tool trnascan-SE --rrna-tool cmscan
 ```
+
+### Behavior change in v0.x (streamlined-mode default)
+
+Streamlined mode now defaults to **barrnap** for rRNA detection (was cmscan).
+Existing pipelines relying on the cmscan output exactly can restore prior
+behavior with `--rrna-tool=cmscan`. Streamlined mode also now includes the
+`mge` (ISEScan) step by default — use `--skip mge` to drop it.
 
 ## SLURM execution (biotite)
 
