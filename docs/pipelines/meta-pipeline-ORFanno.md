@@ -37,22 +37,22 @@ jobs run.
 
 Three presets, picked with `--mode`:
 
-- **`full`** — ORF + smORF + tRNA + ncRNA (Infernal cmscan vs full Rfam) +
-  CRISPR + MGE + geNomad. Deepest annotation; appropriate for
-  publication-quality runs on **up to a few thousand MAGs**. Needs Rfam +
-  geNomad databases.
+- **`full`** — ORF + smORF + tRNA + **rRNA (cmscan via Rfam_rRNA.cm)** +
+  ncRNA (cmscan via Rfam_no_rrna.cm) + CRISPR + MGE + geNomad. Deepest
+  annotation; appropriate for publication-quality runs on **up to a few
+  thousand MAGs**. Needs Rfam + geNomad databases.
 
-- **`streamlined`** — ORF + tRNA + ncRNA (Infernal cmscan vs rRNA-only Rfam
-  subset) + CRISPR. Same Infernal-based rRNA detection, smaller CM set;
-  ~25 % faster than `full` per MAG. Mid-scale runs (5k–50k MAGs). Needs
-  Rfam database.
+- **`streamlined`** — ORF + tRNA + **rRNA (barrnap by default;
+  `--rrna-tool=cmscan` opt-in)** + CRISPR + MGE. Drops the Rfam-other-ncRNA
+  scan from full mode; keeps full structural annotation surface (ORFs,
+  rRNAs, tRNAs, CRISPR, mobile elements). Mid-scale runs (5k–50k MAGs).
+  No Rfam required by default; `--rrna-tool=cmscan` re-introduces a
+  Rfam_rRNA.cm dependency.
 
-- **`fast`** *(added in v1.4.0)* — ORF + tRNA + **rRNA via barrnap** +
-  CRISPR. Replaces Infernal/cmscan with barrnap (HMM-based, full-length
-  rRNAs only) — **~70× faster per MAG** than the cmscan path on benchmark
-  data. **No Rfam or geNomad databases required.** Intended for large
-  **50k–300k-MAG** runs on a SLURM cluster where cmscan would be the
-  wall-time bottleneck. No general ncRNA, smORF, MGE, or geNomad.
+- **`fast`** — ORF + tRNA + **rRNA (barrnap)** + CRISPR. Same as
+  streamlined minus MGE — the cheapest deployable profile. Intended for
+  very large **50k–300k-MAG** runs on a SLURM cluster where cmscan would
+  be the wall-time bottleneck. **No Rfam or geNomad databases required.**
 
 | Mode | rRNA tool (default) | tRNA tool (default) | Other ncRNA | smORF/MGE/geNomad | DBs needed | Typical scale |
 |------|--------------------|--------------------|-------------|-------------------|------------|---------------|
