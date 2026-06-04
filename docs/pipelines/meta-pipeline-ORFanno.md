@@ -88,26 +88,29 @@ behavior with `--rrna-tool=cmscan`. Streamlined mode also now includes the
 meta-pipeline-ORFanno annotate -i mags/ -o output/ --mode fast --profile slurm
 ```
 
-The SLURM profile is tuned for biotite's QOS (10 concurrent running, 200
-submitted per user) and heterogeneous nodes. Per-rule memory is set in the
-profile; rules are grouped per-MAG so each whole-node SLURM submission
-processes many MAGs.
+The SLURM profile pins every submission to one of biotite's 33 **64-CPU /
+768 GB nodes** (`node-64-768g-[1-33]`) via an explicit nodelist, and packs
+16 MAGs per node-group submission so the heavy concurrent phase
+(`orf_prediction` at 4 threads each) fully utilizes the 64 cores.
 
-**Per-run overrides for big jobs:**
+With biotite's QOS (10 concurrent running, 200 submitted per user), this
+gives **~160 MAGs in flight** at any moment for fast/streamlined runs.
+
+**Per-mode tuning:**
 
 ```bash
-# Pack many MAGs per node-acquisition (minimizes queue waits on a busy cluster)
-meta-pipeline-ORFanno annotate -i mags/ -o output/ --mode fast --profile slurm \
-  --config group_components=1000
-
-# Target the large-memory partition for very wide groups
-meta-pipeline-ORFanno annotate -i mags/ -o output/ --mode fast --profile slurm \
-  --config group_components=1000 slurm_partition=high-memory
+# Full mode — cmscan is heavier; drop group size to 8
+meta-pipeline-ORFanno annotate -i mags/ -o output/ --mode full --profile slurm \
+  --config group_components=8
 ```
 
 The cross-MAG aggregation rules (`concat_*`, `summary_table`) run as
 `localrules` on the submission/driver node, so they do not consume your
 10-node budget.
+
+**Measuring per-node utilization:** `scripts/benchmark_slurm_utilization.py`
+scrapes `sacct` and emits per-job CPU% (target ≥80% on the allocated node
+during peak). See `config/profiles/slurm/README.md` for full design details.
 
 ## Output
 
