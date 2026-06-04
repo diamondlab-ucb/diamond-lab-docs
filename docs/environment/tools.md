@@ -14,6 +14,7 @@ are added.
 | Tool | Version | Used By |
 |------|---------|---------|
 | checkm2 | 1.1.0 | meta-pipeline-MAGDrep |
+| datasets (ncbi-datasets-cli) | 18.29.1 | GTDB non-rep genome fetch (unify_reps/02_Datasets); lab genome registry. Also ships `dataformat`. |
 | diamond | 2.1.11 | meta-pipeline-MAGDrep (via CheckM2) |
 | fastani | 1.34 | meta-pipeline-MAGDrep (via GTDB-Tk) |
 | gtdbtk | 2.7.2 | meta-pipeline-MAGDrep |
